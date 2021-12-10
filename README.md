@@ -19,7 +19,7 @@ Just type it, optionally with a regular expression, and it will find
 the correct sub-directory.
 
 ## Example
-[![asciicast](https://asciinema.org/a/ZmUh7UDF77kF1HAMA1qRu0iQC.svg)](https://asciinema.org/a/ZmUh7UDF77kF1HAMA1qRu0iQC)
+[![asciicast](https://asciinema.org/a/mdWiHDlEl02C4r8OH1LEQ1Znp.svg)](https://asciinema.org/a/mdWiHDlEl02C4r8OH1LEQ1Znp)
 
 ## Note
 
