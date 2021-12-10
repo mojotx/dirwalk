@@ -19,6 +19,7 @@ Just type it, optionally with a regular expression, and it will find
 the correct sub-directory.
 
 ## Example
+
 [![asciicast](https://asciinema.org/a/mdWiHDlEl02C4r8OH1LEQ1Znp.svg)](https://asciinema.org/a/mdWiHDlEl02C4r8OH1LEQ1Znp)
 
 ## Note
@@ -37,9 +38,9 @@ original Bourne shell, or one of the lighter-weight shells such as
 ash. I may do so, when I find time.
 
 ## To-Do
+
 I will be adding a ksh specific version soon. I may also see if I can
 consolidate the POSIX-ish shells, such as Zsh and Bash, into one
 script. However, currently there are some subtle differences between
 the shells that makes that challenging, e.g., zsh indexing arrays
 starting with 1, while Bash starts with 0, etc.
-
