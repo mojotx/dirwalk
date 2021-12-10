@@ -17,6 +17,20 @@
 
 dirwalk ()
 {
+    # Detect color terminal
+    if [ -x /usr/bin/tput ] && /usr/bin/tput setaf 1 >&/dev/null; then
+        BLACK="\x1b[01;30m"
+        RED="\x1b[01;31m"
+        GREEN="\x1b[01;32m"
+        YELLOW="\x1b[01;33m"
+        BLUE="\x1b[01;34m"
+        MAGENTA="\x1b[01;35m"
+        CYAN="\x1b[01;36m"
+        WHITE="\x1b[01;37m"
+        BOLD="\x1b[1m"
+        OFF="\x1b[0m"
+    fi
+
     typeset -a DIRLIST
 
     for gitdir in $(find . -type d -name .git -print)
@@ -41,18 +55,23 @@ dirwalk ()
 
     if [[ ${#DIRLIST[@]} -eq 0 ]]
     then
-        print "\x1b[31mNo git sub-directories found!\x1b[0m" >&2
+        print "${RED}No git sub-directories found!${OFF}" >&2
         return 1
     fi
 
-     for ((i = 1; i <= $#DIRLIST; i++)) printf "\x1b[36m%2d\x1b[0m - %s\n" $i $DIRLIST[i]
+     for ((i = 1; i <= $#DIRLIST; i++)) printf "${CYAN}%2d${OFF} - %s\n" $i $DIRLIST[i]
 
-    print -n "\x1b[1mEnter number: \x1b[0m"
+    print -n "${BOLD}Enter number: ${OFF}"
     read
+
+    if ! [[ "${REPLY}" =~ ^[0-9]+$ ]]; then
+        print "${RED}Error: invalid input ${BLACK}(${REPLY} is not a number!)${OFF}\n" >&2
+        return 1
+    fi
 
     if [[ ${REPLY} -gt ${#DIRLIST} ]]
     then
-        print "\x1b[31mError: invalid input \x1b[1;30m(${REPLY} > ${#DIRLIST})\x1b[0m" >&2
+        print "\x1b[31mError: invalid input ${BLACK}(${REPLY} > ${#DIRLIST})${OFF}" >&2
         return 1
     fi
 

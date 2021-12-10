@@ -27,7 +27,16 @@ leaving you where you started.
 ## Supported Shells
 
 I prefer the [fish shell](https://fishshell.com), but I also wrote a
-[Zsh](https://www.zsh.org) version. A bash/ksh/POSIX version would not be
-difficult to add, if there's interest.
+[Zsh](https://www.zsh.org) version and
+[Bash](https://gnu.org/software/bash) version. With some fiddling, you
+could probably get this to work with a more minimal shell, such as the
+original Bourne shell, or one of the lighter-weight shells such as
+ash. I may do so, when I find time.
 
+## To-Do
+I will be adding a ksh specific version soon. I may also see if I can
+consolidate the POSIX-ish shells, such as Zsh and Bash, into one
+script. However, currently there are some subtle differences between
+the shells that makes that challenging, e.g., zsh indexing arrays
+starting with 1, while Bash starts with 0, etc.
 
