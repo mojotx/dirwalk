@@ -1,4 +1,4 @@
-# This zsh function searches for all of the Git projects under the
+# This fish function searches for all of the Git projects under the
 # current working directory, and lists them.  When you enter the
 # number, you change to that directory. If you specify any parameters,
 # they are treated as regular expressions, and only the directories
@@ -47,17 +47,18 @@ function dirwalk --description="walk git directories"
 
     read -P (set_color -o)"Enter number: "(set_color normal) n
 
-
+    # Just bail if there's an empty response
     if [ -z $n ]
         return
     end
-    if [ $n -eq 0 ]
-        return
+
+    if ! string match -r -q -- '^\-?[0-9]+$' $n
+        printf "%sSorry, '%s' is not an integer%s\n" (set_color -o red) $n (set_color normal)
+        return 1
     end
 
-    # If the array is empty, bail out early
-    if test $n -gt (count $DIRLIST)
-        printf "%sIndex %d out of range (%d > %d)%s\n" (set_color -o red) $n $n (count $DIRLIST) (set_color normal)
+    if test $n -gt (count $DIRLIST) -o  $n -lt 1
+        printf "%sIndex %d out of range (%d not within 1–%d)%s\n" (set_color -o red) $n $n (count $DIRLIST) (set_color normal)
         return 1
     end
 
