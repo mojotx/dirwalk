@@ -39,6 +39,13 @@ function dirwalk --description="walk git directories"
         return
     end
 
+    # If only one match, just go there
+    if test (count $DIRLIST) -eq 1
+        echo $DIRLIST[1]
+        cd $DIRLIST[1]
+        return $status
+    end
+
     set i 1
     for dir in $DIRLIST
         printf "%s%2d%s - %s\n" (set_color cyan) $i (set_color normal) $dir
