@@ -18,6 +18,9 @@ Enter dirwalk!
 Just type it, optionally with a regular expression, and it will find
 the correct sub-directory.
 
+## Example
+[![asciicast](https://asciinema.org/a/ZmUh7UDF77kF1HAMA1qRu0iQC.svg)](https://asciinema.org/a/ZmUh7UDF77kF1HAMA1qRu0iQC)
+
 ## Note
 
 Note that this has to be a shell function, otherwise it will change
