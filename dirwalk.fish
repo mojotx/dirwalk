@@ -33,16 +33,15 @@ function dirwalk --description="walk git directories"
 
     end
 
-    # If the array is empty, bail out early
-    if test (count $DIRLIST) -eq 0
+    switch (count $DIRLIST) 
+    case 0
+        # If the array is empty, bail out early
         echo (set_color -o red)Nothing found!(set_color normal)
         return
-    end
-
-    # If only one match, just go there
-    if test (count $DIRLIST) -eq 1
-        echo $DIRLIST[1]
-        cd $DIRLIST[1]
+    case 1
+        # If there's only one match, go there
+        echo (set_color green)Found it!(set_color normal)
+        pushd $DIRLIST[1]
         return $status
     end
 
@@ -54,16 +53,18 @@ function dirwalk --description="walk git directories"
 
     read -P (set_color -o)"Enter number: "(set_color normal) n
 
-    # Just bail if there's an empty response
     if [ -z $n ]
         return
     end
-
-    if ! string match -r -q -- '^\-?[0-9]+$' $n
-        printf "%sSorry, '%s' is not an integer%s\n" (set_color -o red) $n (set_color normal)
+    if not string match -qr '^[0-9]+$' -- $n
+        echo (set_color red)$n is an invalid response(set_color normal)
         return 1
     end
+    if [ $n -eq 0 ]
+        return
+    end
 
+    # Make sure value is within range
     if test $n -gt (count $DIRLIST) -o  $n -lt 1
         printf "%sIndex %d out of range (%d not within 1–%d)%s\n" (set_color -o red) $n $n (count $DIRLIST) (set_color normal)
         return 1
@@ -71,6 +72,6 @@ function dirwalk --description="walk git directories"
 
     echo $DIRLIST[$n]
 
-    cd $DIRLIST[$n]
+    pushd $DIRLIST[$n]
     return $status
 end
